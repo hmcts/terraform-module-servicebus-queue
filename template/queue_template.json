@@ -87,6 +87,10 @@
       }]
   }],
   "outputs": {
+    "queueName": {
+      "type": "string",
+      "value": "[parameters('serviceBusQueueName')]"
+    },
     "primarySendConnectionString": {
       "type": "string",
       "value": "[listkeys(variables('sendAuthRuleResourceId'), variables('sbVersion')).primaryConnectionString]"

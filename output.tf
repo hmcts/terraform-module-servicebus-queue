@@ -1,3 +1,8 @@
+# name of the queue
+output "name" {
+  value = "${azurerm_template_deployment.queue.outputs["queueName"]}"
+}
+
 # primary connection string for send operations
 output "primary_send_connection_string" {
   value = "${azurerm_template_deployment.queue.outputs["primarySendConnectionString"]}"
