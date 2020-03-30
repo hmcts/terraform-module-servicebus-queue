@@ -36,9 +36,3 @@ variable "duplicate_detection_history_time_window" {
   description = "Time window for duplicate detection history (ISO-8601)"
   default = "PT10M"
 }
-
-variable "queue_enabled" {
-  type = "string"
-  description = "enable creation of queue"
-  default = "true"
-}
