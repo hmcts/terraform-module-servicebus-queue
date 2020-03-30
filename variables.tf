@@ -37,7 +37,7 @@ variable "duplicate_detection_history_time_window" {
   default = "PT10M"
 }
 
-variable "create_queue" {
+variable "queue_enabled" {
   type = "string"
   description = "enable creation of queue"
   default = "true"
