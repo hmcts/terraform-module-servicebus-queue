@@ -9,7 +9,6 @@ resource "azurerm_template_deployment" "queue" {
   name                = "${var.name}"
   deployment_mode     = "Incremental"
   resource_group_name = "${var.resource_group_name}"
-  count               = "${var.create_queue == "true" ? 1 : 0}"
 
   parameters = {
     serviceBusNamespaceName             = "${var.namespace_name}"
