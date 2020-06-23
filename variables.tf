@@ -36,3 +36,9 @@ variable "duplicate_detection_history_time_window" {
   description = "Time window for duplicate detection history (ISO-8601)"
   default = "PT10M"
 }
+
+variable "count" {
+  type = "string"
+  description = "The number of queues that should be created. This var is added as support for optional creation"
+  default = "1"
+}
