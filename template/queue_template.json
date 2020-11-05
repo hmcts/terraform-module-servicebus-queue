@@ -53,15 +53,15 @@
       "properties": {
         "lockDuration": "[parameters('lockDuration')]",
         "maxSizeInMegabytes": "1024",
-        "requiresDuplicateDetection": "[parameters('requiresDuplicateDetection')]",
-        "requiresSession": "false",
+        "requiresDuplicateDetection": true,
+        "requiresSession": false,
         "defaultMessageTimeToLive": "P10675199DT2H48M5.4775807S",
-        "deadLetteringOnMessageExpiration": "true",
+        "deadLetteringOnMessageExpiration": true,
         "duplicateDetectionHistoryTimeWindow": "[parameters('duplicateDetectionHistoryTimeWindow')]",
         "maxDeliveryCount": "[parameters('maxDeliveryCount')]",
         "autoDeleteOnIdle": "P10675199DT2H48M5.4775807S",
-        "enablePartitioning": "false",
-        "enableExpress": "false"
+        "enablePartitioning": false,
+        "enableExpress": false
       },
       "resources": [{
         "apiVersion": "2017-04-01",
