@@ -1,21 +1,41 @@
-# ARM template for Service Bus queue
-data "template_file" "queue_template" {
-  template = "${file("${path.module}/template/queue_template.json")}"
+locals {
+  send_auth_rule_name = "SendSharedAccessKey"
+  listen_auth_rule_name = "ListenSharedAccessKey"
 }
 
-# Create Azure Service Bus queue
-resource "azurerm_template_deployment" "queue" {
-  template_body       = "${data.template_file.queue_template.rendered}"
-  name                = "${var.name}"
-  deployment_mode     = "Incremental"
-  resource_group_name = "${var.resource_group_name}"
+resource "azurerm_servicebus_queue" "servicebus_queue" {
+  name                                    = var.name
+  resource_group_name                     = var.resource_group_name
+  namespace_name                          = var.namespace_name
 
-  parameters = {
-    serviceBusNamespaceName             = "${var.namespace_name}"
-    serviceBusQueueName                 = "${var.name}"
-    lockDuration                        = "${var.lock_duration}"
-    maxDeliveryCount                    = "${var.max_delivery_count}"
-    requiresDuplicateDetection          = "${var.requires_duplicate_detection}"
-    duplicateDetectionHistoryTimeWindow = "${var.duplicate_detection_history_time_window}"
-  }
+  lock_duration                           = var.lock_duration
+  max_delivery_count                      = var.max_delivery_count
+  requires_duplicate_detection            = var.requires_duplicate_detection
+  duplicate_detection_history_time_window = var.duplicate_detection_history_time_window
+
+  max_size_in_megabytes                = 1024
+  requires_session                     = false
+  default_message_ttl                  = "P10675199DT2H48M5.4775807S"
+  dead_lettering_on_message_expiration = true
+  auto_delete_on_idle                  = "P10675199DT2H48M5.4775807S"
+  enable_partitioning                  = false
+  enable_express                       = false
+}
+
+resource "azurerm_servicebus_queue_authorization_rule" "SendSharedAccessKey" {
+  name                = local.send_auth_rule_name
+  namespace_name      = var.namespace_name
+  queue_name          = azurerm_servicebus_queue.servicebus_queue.name
+  resource_group_name = var.resource_group_name
+
+  send   = true
+}
+
+resource "azurerm_servicebus_queue_authorization_rule" "ListenSharedAccessKey" {
+  name                = local.listen_auth_rule_name
+  namespace_name      = var.namespace_name
+  queue_name          = azurerm_servicebus_queue.servicebus_queue.name
+  resource_group_name = var.resource_group_name
+
+  listen = true
 }
