@@ -22,7 +22,7 @@ resource "azurerm_servicebus_queue" "servicebus_queue" {
   enable_express                       = false
 }
 
-resource "azurerm_servicebus_queue_authorization_rule" "SendSharedAccessKey" {
+resource "azurerm_servicebus_queue_authorization_rule" "send_auth_rule" {
   name                = local.send_auth_rule_name
   namespace_name      = var.namespace_name
   queue_name          = azurerm_servicebus_queue.servicebus_queue.name
@@ -31,7 +31,7 @@ resource "azurerm_servicebus_queue_authorization_rule" "SendSharedAccessKey" {
   send   = true
 }
 
-resource "azurerm_servicebus_queue_authorization_rule" "ListenSharedAccessKey" {
+resource "azurerm_servicebus_queue_authorization_rule" "listen_auth_rule" {
   name                = local.listen_auth_rule_name
   namespace_name      = var.namespace_name
   queue_name          = azurerm_servicebus_queue.servicebus_queue.name
