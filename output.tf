@@ -13,32 +13,32 @@ output "secondary_send_connection_string" {
   value = azurerm_servicebus_queue_authorization_rule.send_auth_rule.secondary_connection_string
 }
 
-# primary shared access key with send rights
+# Primary shared access key with send rights
 output "primary_send_shared_access_key" {
   value = azurerm_servicebus_queue_authorization_rule.send_auth_rule.primary_key
 }
 
-# secondary shared access key with send rights
+# Secondary shared access key with send rights
 output "secondary_send_shared_access_key" {
   value = azurerm_servicebus_queue_authorization_rule.send_auth_rule.secondary_key
 }
 
-# primary connection string for listen operations
+# Primary connection string for listen operations
 output "primary_listen_connection_string" {
   value = azurerm_servicebus_queue_authorization_rule.listen_auth_rule.primary_connection_string
 }
 
-# secondary connection string for listen operations
+# Secondary connection string for listen operations
 output "secondary_listen_connection_string" {
   value = azurerm_servicebus_queue_authorization_rule.listen_auth_rule.secondary_connection_string
 }
 
-# primary shared access key with listen rights
+# Primary shared access key with listen rights
 output "primary_listen_shared_access_key" {
   value = azurerm_servicebus_queue_authorization_rule.listen_auth_rule.primary_key
 }
 
-# secondary shared access key with listen rights
+# Secondary shared access key with listen rights
 output "secondary_listen_shared_access_key" {
   value = azurerm_servicebus_queue_authorization_rule.listen_auth_rule.secondary_key
 }
