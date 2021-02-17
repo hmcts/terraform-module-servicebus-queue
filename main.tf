@@ -1,12 +1,12 @@
 locals {
-  send_auth_rule_name = "SendSharedAccessKey"
+  send_auth_rule_name   = "SendSharedAccessKey"
   listen_auth_rule_name = "ListenSharedAccessKey"
 }
 
 resource "azurerm_servicebus_queue" "servicebus_queue" {
-  name                                    = var.name
-  resource_group_name                     = var.resource_group_name
-  namespace_name                          = var.namespace_name
+  name                = var.name
+  resource_group_name = var.resource_group_name
+  namespace_name      = var.namespace_name
 
   lock_duration                           = var.lock_duration
   max_delivery_count                      = var.max_delivery_count
@@ -28,7 +28,7 @@ resource "azurerm_servicebus_queue_authorization_rule" "send_auth_rule" {
   queue_name          = azurerm_servicebus_queue.servicebus_queue.name
   resource_group_name = var.resource_group_name
 
-  send   = true
+  send = true
 }
 
 resource "azurerm_servicebus_queue_authorization_rule" "listen_auth_rule" {
