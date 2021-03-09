@@ -3,7 +3,7 @@
 A Terraform module for creating Azure Service Bus queue
 Refer to the following link for a detailed explanation of the Azure Service Bus queue.
 
-[Azure Service Bus Queue](https://docs.microsoft.com/en-us/azure/service-bus-messaging/service-bus-queues-topics-subscriptions) <br />
+[Azure Service Bus Queue](https://docs.microsoft.com/en-us/azure/service-bus-messaging/service-bus-queues-topics-subscriptions)
 
 ## Usage
 
@@ -12,9 +12,9 @@ The following example shows how to use the module to create an Azure Service Bus
 ```terraform
 module "servicebus-queue" {
   source                = "git@github.com:hmcts/terraform-module-servicebus-queue?ref=servicebus_queue_tf"
-  name                  = local.queue_name
+  name                  = "your-queue"
   namespace_name        = module.servicebus-namespace.name
-  resource_group_name   = local.resource_group_name
+  resource_group_name   = azurerm_resource_group.rg.name
 }
 ```
 
