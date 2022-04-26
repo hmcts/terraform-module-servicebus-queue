@@ -28,14 +28,14 @@ resource "azurerm_servicebus_queue" "servicebus_queue" {
 
 resource "azurerm_servicebus_queue_authorization_rule" "send_auth_rule" {
   name                = local.send_auth_rule_name
-  namespace_id        = data.azurerm_servicebus_namespace.this.id
+  queue_id            = azurerm_servicebus_queue.servicebus_queue.id
 
   send = true
 }
 
 resource "azurerm_servicebus_queue_authorization_rule" "listen_auth_rule" {
   name                = local.listen_auth_rule_name
-  namespace_id        = data.azurerm_servicebus_namespace.this.id
+  queue_id          = azurerm_servicebus_queue.servicebus_queue.id
 
   listen = true
 }
