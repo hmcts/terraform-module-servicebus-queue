@@ -16,9 +16,9 @@ resource "azurerm_servicebus_queue" "servicebus_queue" {
   max_delivery_count                      = var.max_delivery_count
   requires_duplicate_detection            = var.requires_duplicate_detection
   duplicate_detection_history_time_window = var.duplicate_detection_history_time_window
+  requires_session                        = var.requires_session
 
   max_size_in_megabytes                = 1024
-  requires_session                     = false
   default_message_ttl                  = "P10675199DT2H48M5.4775807S"
   dead_lettering_on_message_expiration = true
   auto_delete_on_idle                  = "P10675199DT2H48M5.4775807S"
