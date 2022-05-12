@@ -27,17 +27,15 @@ resource "azurerm_servicebus_queue" "servicebus_queue" {
 }
 
 resource "azurerm_servicebus_queue_authorization_rule" "send_auth_rule" {
-  name           = local.send_auth_rule_name
-  namespace_name = var.namespace_name
-  queue_id       = azurerm_servicebus_queue.servicebus_queue.id
+  name     = local.send_auth_rule_name
+  queue_id = azurerm_servicebus_queue.servicebus_queue.id
 
   send = true
 }
 
 resource "azurerm_servicebus_queue_authorization_rule" "listen_auth_rule" {
-  name           = local.listen_auth_rule_name
-  namespace_name = var.namespace_name
-  queue_id       = azurerm_servicebus_queue.servicebus_queue.id
+  name     = local.listen_auth_rule_name
+  queue_id = azurerm_servicebus_queue.servicebus_queue.id
 
   listen = true
 }
