@@ -3,10 +3,14 @@ locals {
   listen_auth_rule_name = "ListenSharedAccessKey"
 }
 
-resource "azurerm_servicebus_queue" "servicebus_queue" {
-  name                = var.name
+data "azurerm_servicebus_namespace" "this" {
+  name                = var.namespace_name
   resource_group_name = var.resource_group_name
-  namespace_name      = var.namespace_name
+}
+
+resource "azurerm_servicebus_queue" "servicebus_queue" {
+  name         = var.name
+  namespace_id = data.azurerm_servicebus_namespace.this.id
 
   lock_duration                           = var.lock_duration
   max_delivery_count                      = var.max_delivery_count
@@ -23,19 +27,17 @@ resource "azurerm_servicebus_queue" "servicebus_queue" {
 }
 
 resource "azurerm_servicebus_queue_authorization_rule" "send_auth_rule" {
-  name                = local.send_auth_rule_name
-  namespace_name      = var.namespace_name
-  queue_name          = azurerm_servicebus_queue.servicebus_queue.name
-  resource_group_name = var.resource_group_name
+  name           = local.send_auth_rule_name
+  namespace_name = var.namespace_name
+  queue_id       = azurerm_servicebus_queue.servicebus_queue.id
 
   send = true
 }
 
 resource "azurerm_servicebus_queue_authorization_rule" "listen_auth_rule" {
-  name                = local.listen_auth_rule_name
-  namespace_name      = var.namespace_name
-  queue_name          = azurerm_servicebus_queue.servicebus_queue.name
-  resource_group_name = var.resource_group_name
+  name           = local.listen_auth_rule_name
+  namespace_name = var.namespace_name
+  queue_id       = azurerm_servicebus_queue.servicebus_queue.id
 
   listen = true
 }
