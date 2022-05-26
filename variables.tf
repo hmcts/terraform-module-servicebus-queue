@@ -36,3 +36,9 @@ variable "duplicate_detection_history_time_window" {
   description = "Time window for duplicate detection history (ISO-8601)"
   default     = "PT10M"
 }
+
+variable "requires_session" {
+  type        = bool
+  description = "A value that indicates whether the queue requires sessions"
+  default     = false
+}
