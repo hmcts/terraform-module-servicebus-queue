@@ -1,6 +1,7 @@
 locals {
   send_auth_rule_name   = "SendSharedAccessKey"
   listen_auth_rule_name = "ListenSharedAccessKey"
+  filter_rule_name      = "TopicFilter"
 }
 
 data "azurerm_servicebus_namespace" "this" {
@@ -38,4 +39,11 @@ resource "azurerm_servicebus_queue_authorization_rule" "listen_auth_rule" {
   queue_id = azurerm_servicebus_queue.servicebus_queue.id
 
   listen = true
+}
+
+resource "azurerm_servicebus_subscription_rule" "BBA3-filter" {
+  name            = local.filter_rule_name
+  subscription_id = azurerm_servicebus_subscription.servicebus_subscription.id
+  filter_type     = "SqlFilter"
+  sql_filter      = "hmctsServiceId = 'BBA3'"
 }
