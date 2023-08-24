@@ -42,3 +42,9 @@ variable "requires_session" {
   description = "A value that indicates whether the queue requires sessions"
   default     = false
 }
+
+variable "max_message_size_in_kilobytes" {
+  type        = string
+  description = "Integer value which controls the maximum size of a message allowed on the queue for Premium SKU"
+  default     = "1024"
+}

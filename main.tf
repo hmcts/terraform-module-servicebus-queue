@@ -17,6 +17,7 @@ resource "azurerm_servicebus_queue" "servicebus_queue" {
   requires_duplicate_detection            = var.requires_duplicate_detection
   duplicate_detection_history_time_window = var.duplicate_detection_history_time_window
   requires_session                        = var.requires_session
+  max_message_size_in_kilobytes           = var.max_message_size_in_kilobytes
 
   max_size_in_megabytes                = 1024
   default_message_ttl                  = "P10675199DT2H48M5.4775807S"
