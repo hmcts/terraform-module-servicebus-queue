@@ -46,5 +46,5 @@ variable "requires_session" {
 variable "max_message_size_in_kilobytes" {
   type        = string
   description = "Integer value which controls the maximum size of a message allowed on the queue for Premium SKU"
-  default     = "1024"
+  default     = null
 }
