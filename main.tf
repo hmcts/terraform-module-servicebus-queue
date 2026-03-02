@@ -1,16 +1,18 @@
 locals {
   send_auth_rule_name   = "SendSharedAccessKey"
   listen_auth_rule_name = "ListenSharedAccessKey"
+  namespace_id          = var.use_namespace_id ? var.namespace_id : data.azurerm_servicebus_namespace.this[0].id
 }
 
 data "azurerm_servicebus_namespace" "this" {
+  count               = var.use_namespace_id ? 0 : 1
   name                = var.namespace_name
   resource_group_name = var.resource_group_name
 }
 
 resource "azurerm_servicebus_queue" "servicebus_queue" {
   name         = var.name
-  namespace_id = data.azurerm_servicebus_namespace.this.id
+  namespace_id = local.namespace_id
 
   lock_duration                           = var.lock_duration
   max_delivery_count                      = var.max_delivery_count

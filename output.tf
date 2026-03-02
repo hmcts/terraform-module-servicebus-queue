@@ -3,6 +3,11 @@ output "name" {
   value = azurerm_servicebus_queue.servicebus_queue.name
 }
 
+# Azure resource ID of the queue
+output "queue_id" {
+  value = azurerm_servicebus_queue.servicebus_queue.id
+}
+
 # primary connection string for send operations
 output "primary_send_connection_string" {
   value = azurerm_servicebus_queue_authorization_rule.send_auth_rule.primary_connection_string
