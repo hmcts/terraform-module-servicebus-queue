@@ -28,6 +28,14 @@ The following parameters are required by this module
 - `resource_group_name` the name of the resource group in which to create the ServiceBus namespace.
 - `namespace_name` the name of the service bus namespace in which the queue must be created.
 
+### Managed identity access (optional)
+
+All identity inputs are optional, default to `null`, and accept an object ID (`principal_id`).
+
+- `managed_identity_object_id`: Acts as the default for both of the below settings
+- `sender_managed_identity_object_id`: shared identity for both sending.
+- `receiver_managed_identity_object_id`: shared identity for both receiving
+
 ### Output
 
 The following variables are provided by the module for use in other modules

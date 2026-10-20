@@ -48,3 +48,21 @@ variable "max_message_size_in_kilobytes" {
   description = "Integer value which controls the maximum size of a message allowed on the queue for Premium SKU"
   default     = null
 }
+
+variable "managed_identity_object_id" {
+  type        = string
+  default     = null
+  description = "the object id of the managed identity - the default for both sender and receiver - can be retrieved with az identity show --name <identity-name>-sandbox-mi -g managed-identities-<env>-rg --subscription DCD-CFTAPPS-<env> --query principalId -o tsv"
+}
+
+variable "sender_managed_identity_object_id" {
+  type        = string
+  default     = null
+  description = "the object id of the managed identity that can send messages to the queue - can be retrieved with az identity show --name <identity-name>-sandbox-mi -g managed-identities-<env>-rg --subscription DCD-CFTAPPS-<env> --query principalId -o tsv"
+}
+
+variable "receiver_managed_identity_object_id" {
+  type        = string
+  default     = null
+  description = "the object id of the managed identity that can recieve messages from the queue - can be retrieved with az identity show --name <identity-name>-sandbox-mi -g managed-identities-<env>-rg --subscription DCD-CFTAPPS-<env> --query principalId -o tsv"
+}
